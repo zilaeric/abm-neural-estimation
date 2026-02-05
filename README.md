@@ -1,2 +1,3 @@
-# surrogate-smm
-Implementation of "Surrogate Modelling Extension of the Simulated Method of Moments".
+# Neural Estimation of Financial Agent-Based Models: A Comparative Study
+
+Implementation of "Neural Estimation of Financial Agent-Based Models: A Comparative Study".
