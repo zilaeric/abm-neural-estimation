@@ -1,14 +1,9 @@
 import sys
 
-from deepabm import __version__
-
-from deepabm.environments import load_environment
-
-from deepabm.policies import load_policy
-
-from deepabm.utils import EvaluateParser
-from deepabm.utils import LOGGER, setup_logging, setup_wandb, terminate_wandb
-from deepabm.utils import set_seed
+from deepfabm import __version__
+from deepfabm.utils import TrainParser
+from deepfabm.utils import LOGGER, setup_logging, setup_wandb, terminate_wandb
+from deepfabm.utils import set_seed
 
 __author__ = "Eric Zila"
 __copyright__ = "Eric Zila"
@@ -17,7 +12,7 @@ __license__ = "MIT"
 
 def main(args):
     """
-    Performs model evaluation.
+    Performs model training.
 
     Args:
         args: The command-line arguments passed to the script.
@@ -26,10 +21,10 @@ def main(args):
         None
     """
     # Parse the command-line arguments
-    parser = EvaluateParser()
+    parser = TrainParser()
     args = parser.parse_args(args)
 
-    # Set up standard output logging
+    # Set up logging
     setup_logging(args.loglevel)
     LOGGER.info(f"Dictionary of parsed arguments: {vars(args)}")
 
@@ -40,25 +35,22 @@ def main(args):
     # Set up the random seed
     set_seed(args.seed)
 
-    LOGGER.info("Initiating the evaluation process...")
+    LOGGER.info("Initiating the training process...")
     
-    # Load environment
-    env = load_environment(args.environment)
+    # TODO Load dataset
 
-    # Select policy
-    policy = load_policy(args.policy, env)
+    # TODO Select model
 
-    # TODO Load model and weights if trained policy is selected
-    if args.policy == "trained":
-        raise NotImplementedError()
+    # TODO Train model on dataset
 
-    # TODO Assess model performance on environment
+    # TODO Save trained model
 
-    LOGGER.info("Finished the evaluation process!")
+    LOGGER.info("Finished the training process!")
 
     # Terminate Weights & Biases logging
     if args.wandb:
         terminate_wandb()
+
 
 def run():
     """

@@ -2,7 +2,7 @@ from .policy_astar import AStarPolicy
 from .policy_random import RandomPolicy
 from .policy_trained import TrainedPolicy
 
-from deepabm.utils import LOGGER
+from deepfabm.utils import LOGGER
 
 def load_policy(policy: str):
     """

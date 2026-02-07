@@ -1,9 +1,14 @@
 import sys
 
-from deepabm import __version__
-from deepabm.utils import TrainParser
-from deepabm.utils import LOGGER, setup_logging, setup_wandb, terminate_wandb
-from deepabm.utils import set_seed
+from deepfabm import __version__
+
+from deepfabm.environments import load_environment
+
+from deepfabm.policies import load_policy
+
+from deepfabm.utils import GenerateParser
+from deepfabm.utils import LOGGER, setup_logging, setup_wandb, terminate_wandb
+from deepfabm.utils import set_seed
 
 __author__ = "Eric Zila"
 __copyright__ = "Eric Zila"
@@ -12,7 +17,7 @@ __license__ = "MIT"
 
 def main(args):
     """
-    Performs model training.
+    Performs data generation.
 
     Args:
         args: The command-line arguments passed to the script.
@@ -21,7 +26,7 @@ def main(args):
         None
     """
     # Parse the command-line arguments
-    parser = TrainParser()
+    parser = GenerateParser()
     args = parser.parse_args(args)
 
     # Set up logging
@@ -34,18 +39,22 @@ def main(args):
 
     # Set up the random seed
     set_seed(args.seed)
-
-    LOGGER.info("Initiating the training process...")
+    LOGGER.info("Initiating the data generation process...")
     
-    # TODO Load dataset
+    # Load environment
+    env = load_environment(args.environment)
 
-    # TODO Select model
+    # Load policy
+    policy = load_policy(args.policy, env)
 
-    # TODO Train model on dataset
+    # TODO Load model and weights if trained policy is selected
+    if args.policy == "trained":
+        raise NotImplementedError()
 
-    # TODO Save trained model
+    # Generate dataset
+    policy.generate_dataset()
 
-    LOGGER.info("Finished the training process!")
+    LOGGER.info("Finished the data generation process!")
 
     # Terminate Weights & Biases logging
     if args.wandb:

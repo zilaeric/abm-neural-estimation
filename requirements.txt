@@ -1,5 +1,4 @@
 pytest
-dotenv
 numpy
 torch
 wandb

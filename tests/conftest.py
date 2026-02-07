@@ -1,6 +1,6 @@
 import pytest
 
-from deepabm.policies.policy_random import RandomPolicy
+from deepfabm.policies.policy_random import RandomPolicy
 
 
 @pytest.fixture(scope="class")

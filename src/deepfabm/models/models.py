@@ -1,4 +1,4 @@
-from deepabm.utils import LOGGER
+from deepfabm.utils import LOGGER
 
 
 def load_model(model: str):
