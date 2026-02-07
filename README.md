@@ -4,19 +4,20 @@ Implementation of "Neural Estimation of Financial Agent-Based Models: A Comparat
 
 ## Installation
 
-To install the package and the corresponding virtual environment, run:
+To set up virtual environment and install development version of the package, run:
 ```
-conda env create -f deepabm.yaml
-conda activate deepabm
+conda create --name deepfabm python=3.14
+conda activate deepfabm
+pip install -r requirements.txt
 pip install -e .
 ```
 
-To log into your Weights and Biases account, run:
+To log into your Weights & Biases account, run:
 ```
 wandb login
 ```
 
-To confirm that installation was successful by completing unit tests, run:
+Finally, you can validate the installation with the test suite by running:
 ```
 python -m pytest tests
 ```
