@@ -8,7 +8,7 @@ def set_seed(seed):
     Set seed for reproducibility.
 
     Args:
-        seed (int): The seed value to be set.
+        seed (int): Seed value to be set
 
     Returns:
         None

@@ -1,18 +1,10 @@
 import sys
 
-from deepfabm import __version__
-
-from deepfabm.environments import load_environment
-
 from deepfabm.policies import load_policy
 
 from deepfabm.utils import EvaluateParser
 from deepfabm.utils import LOGGER, setup_logging, setup_wandb, terminate_wandb
 from deepfabm.utils import set_seed
-
-__author__ = "Eric Zila"
-__copyright__ = "Eric Zila"
-__license__ = "MIT"
 
 
 def main(args):
@@ -20,12 +12,12 @@ def main(args):
     Performs model evaluation.
 
     Args:
-        args: The command-line arguments passed to the script.
+        args: CLI arguments passed to the script
 
     Returns:
         None
     """
-    # Parse the command-line arguments
+    # Parse the CLI arguments
     parser = EvaluateParser()
     args = parser.parse_args(args)
 
@@ -41,9 +33,6 @@ def main(args):
     set_seed(args.seed)
 
     LOGGER.info("Initiating the evaluation process...")
-    
-    # Load environment
-    env = load_environment(args.environment)
 
     # Select policy
     policy = load_policy(args.policy, env)

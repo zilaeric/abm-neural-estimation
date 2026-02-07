@@ -1,13 +1,8 @@
 import sys
 
-from deepfabm import __version__
 from deepfabm.utils import TrainParser
 from deepfabm.utils import LOGGER, setup_logging, setup_wandb, terminate_wandb
 from deepfabm.utils import set_seed
-
-__author__ = "Eric Zila"
-__copyright__ = "Eric Zila"
-__license__ = "MIT"
 
 
 def main(args):
@@ -15,7 +10,7 @@ def main(args):
     Performs model training.
 
     Args:
-        args: The command-line arguments passed to the script.
+        args: CLI arguments passed to the script
 
     Returns:
         None

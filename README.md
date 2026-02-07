@@ -21,3 +21,10 @@ Finally, you can validate the installation with the test suite by running:
 ```
 python -m pytest tests
 ```
+
+## Training
+
+To train a model, 
+
+## Evaluation
+
