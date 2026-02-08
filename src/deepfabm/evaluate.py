@@ -1,7 +1,5 @@
 import sys
 
-from deepfabm.policies import load_policy
-
 from deepfabm.utils import EvaluateParser
 from deepfabm.utils import LOGGER, setup_logging, setup_wandb, terminate_wandb
 from deepfabm.utils import set_seed
@@ -33,13 +31,6 @@ def main(args):
     set_seed(args.seed)
 
     LOGGER.info("Initiating the evaluation process...")
-
-    # Select policy
-    policy = load_policy(args.policy, env)
-
-    # TODO Load model and weights if trained policy is selected
-    if args.policy == "trained":
-        raise NotImplementedError()
 
     # TODO Assess model performance on environment
 
