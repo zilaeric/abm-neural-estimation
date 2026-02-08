@@ -1,34 +1,16 @@
 import sys
 
-from deepfabm.utils import TrainParser
-from deepfabm.utils import LOGGER, setup_logging, setup_wandb, terminate_wandb
-from deepfabm.utils import set_seed
+from deepfabm.utils import initialize_run, terminate_run
+from deepfabm.utils import LOGGER
 
 
 def main(args):
     """
-    Performs neural network training.
-
-    Args:
-        args: CLI arguments passed to the script
-
-    Returns:
-        None
+    Trains neural network to calibrate parameters of a financial agent-based model.
+    
+    :param args: CLI arguments passed during invocation
     """
-    # Parse the command-line arguments
-    parser = TrainParser()
-    args = parser.parse_args(args)
-
-    # Set up logging
-    setup_logging(args.loglevel)
-    LOGGER.info(f"Dictionary of parsed arguments: {vars(args)}")
-
-    # Set up Weights & Biases logging
-    if args.wandb:
-        setup_wandb(project=args.wandb_project, config=vars(args))
-
-    # Set up the random seed
-    set_seed(args.seed)
+    initialize_run("train", args)
 
     LOGGER.info("Initiating the training process...")
     
@@ -42,9 +24,7 @@ def main(args):
 
     LOGGER.info("Finished the training process!")
 
-    # Terminate Weights & Biases logging
-    if args.wandb:
-        terminate_wandb()
+    terminate_run(args)
 
 
 def run():
