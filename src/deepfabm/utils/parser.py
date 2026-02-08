@@ -42,7 +42,7 @@ class BaseParser:
             "--wandb",
             "-wb",
             dest="wandb",
-            help="enable Weights & Biases and set project",
+            help="set Weights & Biases project to store training run progress",
             type=str,
             metavar="STR",
             default=None,

@@ -7,7 +7,7 @@ from deepfabm.utils import set_seed
 
 def main(args):
     """
-    Performs model training.
+    Performs neural network training.
 
     Args:
         args: CLI arguments passed to the script
