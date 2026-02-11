@@ -1,39 +1,16 @@
 import sys
 
-from deepfabm import __version__
-from deepfabm.utils import TrainParser
-from deepfabm.utils import LOGGER, setup_logging, setup_wandb, terminate_wandb
-from deepfabm.utils import set_seed
-
-__author__ = "Eric Zila"
-__copyright__ = "Eric Zila"
-__license__ = "MIT"
+from deepfabm.utils import LOGGER, initialize_run, terminate_run
 
 
-def main(args):
+def main(args: list[str]) -> int:
     """
-    Performs model training.
-
-    Args:
-        args: The command-line arguments passed to the script.
-
-    Returns:
-        None
+    Trains neural network to calibrate parameters of a financial agent-based model.
+    
+    :param args: CLI arguments passed during invocation
+    :type args: list[str]
     """
-    # Parse the command-line arguments
-    parser = TrainParser()
-    args = parser.parse_args(args)
-
-    # Set up logging
-    setup_logging(args.loglevel)
-    LOGGER.info(f"Dictionary of parsed arguments: {vars(args)}")
-
-    # Set up Weights & Biases logging
-    if args.wandb:
-        setup_wandb(project=args.wandb_project, config=vars(args))
-
-    # Set up the random seed
-    set_seed(args.seed)
+    args = initialize_run("train", args)
 
     LOGGER.info("Initiating the training process...")
     
@@ -47,17 +24,17 @@ def main(args):
 
     LOGGER.info("Finished the training process!")
 
-    # Terminate Weights & Biases logging
-    if args.wandb:
-        terminate_wandb()
+    terminate_run(args)
+
+    return 0
 
 
-def run():
+def run(argv: list[str] | None = None) -> int:
     """
     Calls the main function when CLI is used.
     """
-    main(sys.argv[1:])
+    return main(sys.argv[1:] if argv is None else argv)
 
 
 if __name__ == "__main__":
-    run()
+    raise SystemExit(run())

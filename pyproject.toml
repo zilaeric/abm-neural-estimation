@@ -10,14 +10,18 @@ authors = [
 ]
 description = "Deep neural network estimation framework for financial agent-based models."
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.11"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
 ]
 license = "MIT"
 license-files = ["LICENSE"]
-keywords = ["deep-learning", "neural-network", "transformer", "multi-agent-model"]
+keywords = ["deep learning", "neural network", "transformer", "multi-agent model"]
+
+[project.scripts]
+deepfabm-train = "deepfabm.train:run"
+deepfabm-evaluate = "deepfabm.evaluate:run"
 
 [project.urls]
 Homepage = "https://github.com/zilaeric/abm-neural-estimation"
