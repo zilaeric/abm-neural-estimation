@@ -1,42 +1,81 @@
 from .base import Model
-from .implementations.rwalksb import RandomWalkWithStructuralBreak
 
 from deepfabm.utils import LOGGER
 
 
-_MODEL_REGISTRY = {}
+_MODEL_REGISTRY: dict[str, type[Model]] = {}
+_IMPLEMENTATIONS_IMPORTED: bool = False
 
 
 def register_model(name: str):
-    def decorator(cls: Model) -> Model:
-        if name in _MODEL_REGISTRY and _MODEL_REGISTRY[name] is not cls:
-            raise ValueError(f"Model '{name}' already registered")
+    """
+    Register model implementation to model registry via class decorator.
+    
+    :param name: Model identifier to use for the model class
+    :type name: str
+    """
+    def decorator(model_class: type[Model]) -> type[Model]:
+        if name in _MODEL_REGISTRY and _MODEL_REGISTRY[name] is not model_class:
+            raise ValueError(f"Model '{name}' already registered.")
+
+        if not issubclass(model_class, Model):
+            raise TypeError(f"Trying to add model '{name}' which is not subclass of the 'Model' class.")
+
+        # Add model to model registry
+        _MODEL_REGISTRY[name] = model_class
         
-        _MODEL_REGISTRY[name] = cls
-        return cls
+        return model_class
     
     return decorator
 
 
+def _register_implementations() -> None:
+    """
+    Ensure all model implementations have been imported at least once.
+
+    Importing the implementations package triggers decorator-based registration.
+    This function is safe to call multiple times.
+    """
+    global _IMPLEMENTATIONS_IMPORTED
+    if _IMPLEMENTATIONS_IMPORTED:
+        return
+
+    from . import implementations  # noqa: F401
+    _IMPLEMENTATIONS_IMPORTED = True
+
+    LOGGER.debug(f"Model registry contains the following models: {list_models()}.")
+
+
+def list_models() -> list[str]:
+    """
+    List all models registered in the model registry.
+    
+    :return: List of all model identifiers registered in the model registry
+    :rtype: list[str]
+    """
+    _register_implementations()
+
+    return sorted(_MODEL_REGISTRY)
+
+
 def load_model(model: str, **kwargs) -> Model:
     """
-    Load specified model.
+    Load specified model. Preferred way of loading models.
     
-    :param model: Model identifier
+    :param model: Model identifier of the model to be loaded
     :type model: str
-    :return: Model instance
+    :return: Instance of the loaded model
     :rtype: Model
     """
-    from . import implementations
+    _register_implementations()
 
-    # Retrieve correct model
     try:
-        cls = _MODEL_REGISTRY[model]
+        # Retrieve correct model class from model registry
+        model_class = _MODEL_REGISTRY[model]
+        LOGGER.info(f"Loaded model '{model}' from model registry.")
     except KeyError as e:
         raise ValueError(
-            f"No model found for '{model}'. Available: {sorted(_MODEL_REGISTRY)}."
+            f"No model found for '{model}'. Available: {list_models()}."
         ) from e
-    if model in _MODEL_REGISTRY:
-        return _MODEL_REGISTRY[model](**kwargs)
     
-    return cls(**kwargs)
+    return model_class(**kwargs)
