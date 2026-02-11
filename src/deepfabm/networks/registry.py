@@ -24,7 +24,7 @@ def _register_implementations() -> None:
     from . import implementations  # noqa: F401
     _IMPLEMENTATIONS_IMPORTED = True
 
-    LOGGER.debug(f"Network registry contains the following models: {list_networks()}.")
+    LOGGER.debug(f"Network registry contains the following networks: {list_networks()}.")
 
 
 def register_network(name: str):
@@ -44,7 +44,7 @@ def register_network(name: str):
                 f"Trying to add network '{name}' which is not subclass of the 'Network' class."
             )
 
-        # Add model to network registry
+        # Add network to network registry
         _NETWORK_REGISTRY[name] = network_class
 
         return network_class
@@ -54,7 +54,7 @@ def register_network(name: str):
 
 def list_networks() -> list[str]:
     """
-    List all networks registered in the model registry.
+    List all networks registered in the network registry.
     
     :return: List of all identifiers from the network registry
     :rtype: list[str]
