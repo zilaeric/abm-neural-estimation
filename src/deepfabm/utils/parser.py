@@ -1,12 +1,11 @@
 import logging
-
-from argparse import ArgumentParser
+import argparse
 
 
 class BaseParser:
     def __init__(self, description="Parser template"):
         # Initialize parser
-        self.parser = ArgumentParser(description=description, add_help=False)
+        self.parser = argparse.ArgumentParser(description=description, add_help=False)
 
         # Define argument groups
         self.required = self.parser.add_argument_group("Required arguments")
@@ -23,9 +22,10 @@ class BaseParser:
             "--verbose",
             "-v",
             dest="loglevel",
-            help="set loglevel to INFO",
+            help="set loglevel to DEBUG",
             action="store_const",
-            const=logging.INFO,
+            default=logging.INFO,
+            const=logging.DEBUG,
         )
 
         self.optional.add_argument(
@@ -42,13 +42,13 @@ class BaseParser:
             "--wandb",
             "-wb",
             dest="wandb",
-            help="set Weights & Biases project to store training run progress",
+            help="set Weights & Biases project name to store experiment run to",
             type=str,
             metavar="STR",
             default=None,
         )
 
-    def parse_args(self, args):
+    def parse_args(self, args) -> argparse.Namespace:
         return self.parser.parse_args(args)
 
 
