@@ -1,5 +1,5 @@
-import logging
 import argparse
+import logging
 
 
 class BaseParser:
@@ -75,7 +75,7 @@ class EvaluateParser(BaseParser):
             "--folder",
             "-f",
             dest="folder",
-            help="choose results folder containing trained network weights to use for evaluation",
+            help="choose results folder with trained weights to use for evaluation",
             type=str,
             metavar="STR",
             required=True,
@@ -85,7 +85,7 @@ class EvaluateParser(BaseParser):
             "--data",
             "-d",
             dest="data",
-            help="choose empirical dataset to estimate model for, otherwise use simulated dataset",
+            help="choose empirical data to estimate model for, else use simulate data",
             type=str,
             metavar="STR",
             default=None,

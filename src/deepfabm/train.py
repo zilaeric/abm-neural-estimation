@@ -6,14 +6,14 @@ from deepfabm.utils import LOGGER, initialize_run, terminate_run
 def main(args: list[str]) -> int:
     """
     Trains neural network to calibrate parameters of a financial agent-based model.
-    
+
     :param args: CLI arguments passed during invocation
     :type args: list[str]
     """
     args = initialize_run("train", args)
 
     LOGGER.info("Initiating the training process...")
-    
+
     # TODO Load dataset
 
     # TODO Select model

@@ -1,4 +1,5 @@
 import random
+
 import numpy as np
 import torch
 
@@ -6,7 +7,7 @@ import torch
 def set_seed(seed: int) -> None:
     """
     Set seed to ensure reproducibility of experiments.
-    
+
     :param seed: Seed number
     :type seed: int
     """

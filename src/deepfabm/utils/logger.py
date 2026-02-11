@@ -1,5 +1,5 @@
-import sys
 import logging
+import sys
 
 LOGGER = logging.getLogger(__name__)
 
@@ -27,6 +27,7 @@ def setup_wandb(project: str = "deepabm", config: dict = None) -> None:
     :type config: dict
     """
     import wandb
+
     wandb.init(project=project, config=config)
     LOGGER.info(f"Weights & Biases logging initialized under '{project}' project.")
 
@@ -36,5 +37,6 @@ def terminate_wandb() -> None:
     Terminate Weights & Biases logging.
     """
     import wandb
+
     wandb.finish()
     LOGGER.info("Weights & Biases logging terminated.")

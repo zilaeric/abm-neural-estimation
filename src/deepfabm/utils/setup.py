@@ -1,10 +1,8 @@
-from .parser import TrainParser, EvaluateParser
-from .logger import LOGGER, setup_logging, setup_wandb, terminate_wandb
-from .seed import set_seed
-
-
 import argparse
 
+from .logger import LOGGER, setup_logging, setup_wandb, terminate_wandb
+from .parser import EvaluateParser, TrainParser
+from .seed import set_seed
 
 PARSER_MAP = {
     "train": TrainParser,
@@ -15,7 +13,7 @@ PARSER_MAP = {
 def initialize_run(script: str, args: list[str]) -> argparse.Namespace:
     """
     Initializes run by setting up results directory and initializing all services.
-    
+
     :param script: Invoked script, either `"train"` or `"evaluate"`
     :type script: str
     :param args: CLI arguments passed during invocation
@@ -28,7 +26,7 @@ def initialize_run(script: str, args: list[str]) -> argparse.Namespace:
         parser = PARSER_MAP[script]()
     else:
         raise ValueError(f"No parser found for the invoked script '{script}'")
-    
+
     args = parser.parse_args(args)
 
     # Set up logging
@@ -48,7 +46,7 @@ def initialize_run(script: str, args: list[str]) -> argparse.Namespace:
 def terminate_run(args: argparse.Namespace):
     """
     Finalizes run by stopping all running services.
-    
+
     :param args: CLI arguments passed during invocation
     :type args: argparse.Namespace
     """

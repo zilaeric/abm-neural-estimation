@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-from .base import Model
-
 from deepfabm.utils import LOGGER
 
+from .base import Model
 
 _MODEL_REGISTRY: dict[str, type[Model]] = {}
 _IMPLEMENTATIONS_IMPORTED: bool = False
@@ -21,6 +20,7 @@ def _register_implementations() -> None:
         return
 
     from . import implementations  # noqa: F401
+
     _IMPLEMENTATIONS_IMPORTED = True
 
     LOGGER.debug(f"Model registry contains the following models: {list_models()}.")
@@ -29,31 +29,32 @@ def _register_implementations() -> None:
 def register_model(name: str):
     """
     Class decorator to register a model implementation.
-    
+
     :param name: Model identifier to use for the model class
     :type name: str
     """
+
     def decorator(model_class: type[Model]) -> type[Model]:
         if name in _MODEL_REGISTRY and _MODEL_REGISTRY[name] is not model_class:
             raise ValueError(f"Model '{name}' already registered.")
 
         if not issubclass(model_class, Model):
             raise TypeError(
-                f"Trying to add model '{name}' which is not subclass of the 'Model' class."
+                f"Trying to add model '{name}' which is not of the 'Model' class."
             )
 
         # Add model to model registry
         _MODEL_REGISTRY[name] = model_class
-        
+
         return model_class
-    
+
     return decorator
 
 
 def list_models() -> list[str]:
     """
     List all models registered in the model registry.
-    
+
     :return: List of all identifiers from the model registry
     :rtype: list[str]
     """
@@ -65,7 +66,7 @@ def list_models() -> list[str]:
 def load_model(model: str, **kwargs) -> Model:
     """
     Load specified model. Preferred way of loading models.
-    
+
     :param model: Model identifier of the model to be loaded
     :type model: str
     :return: Instance of the loaded model
@@ -80,5 +81,5 @@ def load_model(model: str, **kwargs) -> Model:
         raise ValueError(
             f"No model found for '{model}'. Available: {list_models()}."
         ) from e
-    
+
     return model_class(**kwargs)

@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-from .base import Network
-
 from deepfabm.utils import LOGGER
 
+from .base import Network
 
 _NETWORK_REGISTRY: dict[str, type[Network]] = {}
 _IMPLEMENTATIONS_IMPORTED: bool = False
@@ -22,9 +21,12 @@ def _register_implementations() -> None:
         return
 
     from . import implementations  # noqa: F401
+
     _IMPLEMENTATIONS_IMPORTED = True
 
-    LOGGER.debug(f"Network registry contains the following networks: {list_networks()}.")
+    LOGGER.debug(
+        f"Network registry contains the following networks: {list_networks()}."
+    )
 
 
 def register_network(name: str):
@@ -41,7 +43,7 @@ def register_network(name: str):
 
         if not issubclass(network_class, Network):
             raise TypeError(
-                f"Trying to add network '{name}' which is not subclass of the 'Network' class."
+                f"Trying to add network '{name}' which is not of the 'Network' class."
             )
 
         # Add network to network registry
@@ -55,7 +57,7 @@ def register_network(name: str):
 def list_networks() -> list[str]:
     """
     List all networks registered in the network registry.
-    
+
     :return: List of all identifiers from the network registry
     :rtype: list[str]
     """

@@ -7,7 +7,7 @@ def main(args: list[str]) -> int:
     """
     Performs inference using neural network trained to calibrate parameters of
     a financial agent-based model.
-    
+
     :param args: CLI arguments passed during invocation
     :type args: list[str]
     """
