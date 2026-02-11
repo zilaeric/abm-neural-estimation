@@ -1,16 +1,16 @@
 import sys
 
-from deepfabm.utils import initialize_run, terminate_run
-from deepfabm.utils import LOGGER
+from deepfabm.utils import LOGGER, initialize_run, terminate_run
 
 
-def main(args):
+def main(args: list[str]) -> int:
     """
     Trains neural network to calibrate parameters of a financial agent-based model.
     
     :param args: CLI arguments passed during invocation
+    :type args: list[str]
     """
-    initialize_run("train", args)
+    args = initialize_run("train", args)
 
     LOGGER.info("Initiating the training process...")
     
@@ -26,13 +26,15 @@ def main(args):
 
     terminate_run(args)
 
+    return 0
 
-def run():
+
+def run(argv: list[str] | None = None) -> int:
     """
     Calls the main function when CLI is used.
     """
-    main(sys.argv[1:])
+    return main(sys.argv[1:] if argv is None else argv)
 
 
 if __name__ == "__main__":
-    run()
+    raise SystemExit(run())

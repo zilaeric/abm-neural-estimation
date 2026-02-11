@@ -12,7 +12,7 @@ PARSER_MAP = {
 }
 
 
-def initialize_run(script: str, args: list[str]):
+def initialize_run(script: str, args: list[str]) -> argparse.Namespace:
     """
     Initializes run by setting up results directory and initializing all services.
     
@@ -20,6 +20,8 @@ def initialize_run(script: str, args: list[str]):
     :type script: str
     :param args: CLI arguments passed during invocation
     :type args: list[str]
+    :return: Parsed arguments
+    :rtype: argparse.Namespace
     """
     # Parse the command-line arguments
     if script in PARSER_MAP:
@@ -39,6 +41,8 @@ def initialize_run(script: str, args: list[str]):
 
     # Set up the random seed
     set_seed(args.seed)
+
+    return args
 
 
 def terminate_run(args: argparse.Namespace):

@@ -17,7 +17,7 @@ def setup_logging(loglevel: int | str) -> None:
     )
 
 
-def setup_wandb(project: str="deepabm", config: dict=None) -> None:
+def setup_wandb(project: str = "deepabm", config: dict = None) -> None:
     """
     Initiate Weights & Biases logging.
 
