@@ -1,9 +1,11 @@
-# Neural Estimation of Financial Agent-Based Models: A Comparative Study
+# Deep Neural Network Estimation of Financial Agent-Based Models: A Comparative Study
 
-Implementation of "Neural Estimation of Financial Agent-Based Models: A Comparative
-Study".
+Implementation of "Deep Neural Network Estimation of Financial Agent-Based Models: 
+A Comparative Study".
 
 ## Installation
+
+### Dependencies
 
 To set up virtual environment and install development version of the package, run:
 ```
@@ -13,15 +15,50 @@ pip install -r requirements.txt
 pip install -e .
 ```
 
-To log into your Weights & Biases account, run:
+### (Optional) Weights & Biases
+
+Optionally, you can use your Weights & Biases account to track neural network training 
+progress. If you avoid using the corresponding CLI argument (`--wandb/-wb`) to configure
+a Weights & Biases project, it is unnecessary to log into your account. Otherwise, log 
+into your Weights & Biases account by running:
 ```
 wandb login
 ```
 
-Finally, you can validate the installation with the test suite by running:
+### (Optional) Pre-commit checks
+
+To install pre-commit hook that performs linting, formatting, and testing, run:
+```
+pre-commit install
+```
+
+The pre-commit hook can be also called at will by running:
+```
+pre-commit run --all-files
+```
+
+## Development
+
+### Linting & formatting
+
+Ruff is used for PEP 8 linting and formatting. To perform checks and reformat code, run:
+```
+ruff check . --fix
+ruff format .
+```
+
+These checks run automatically if the pre-commit hook is installed as described in the
+section before.
+
+### Testing
+
+Pytest is used for testing. To execute the full test suite, run:
 ```
 python -m pytest tests
 ```
+
+These tests run automatically if the pre-commit hook is installed as described in the
+section before.
 
 ## Usage
 
@@ -44,9 +81,9 @@ Required arguments:
 
 Optional arguments:
   --help, -h            show this help message and exit
-  --verbose, -v         set loglevel to INFO
+  --verbose, -v         set loglevel to DEBUG
   --seed, -s INT        set seed for reproducibility
-  --wandb, -wb STR      set Weights & Biases project to store training run progress
+  --wandb, -wb STR      set Weights & Biases project name to store experiment run to
 ```
 
 ### Evaluation
@@ -61,12 +98,12 @@ usage: deepfabm-evaluate [--help] [--verbose] [--seed INT] [--wandb STR] --folde
 Parser for evaluation
 
 Required arguments:
-  --folder, -f STR  choose results folder containing trained network weights to use for evaluation
+  --folder, -f STR  choose results folder with trained weights to use for evaluation
 
 Optional arguments:
   --help, -h        show this help message and exit
-  --verbose, -v     set loglevel to INFO
+  --verbose, -v     set loglevel to DEBUG
   --seed, -s INT    set seed for reproducibility
-  --wandb, -wb STR  set Weights & Biases project to store training run progress
-  --data, -d STR    choose empirical dataset to estimate model for, otherwise use simulated dataset
+  --wandb, -wb STR  set Weights & Biases project name to store experiment run to
+  --data, -d STR    choose empirical data to estimate model for, else use simulate data
 ```
