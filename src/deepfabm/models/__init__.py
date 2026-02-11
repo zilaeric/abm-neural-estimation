@@ -1,4 +1,4 @@
-from .registry import load_model, list_models
 from .base import Model
+from .registry import load_model, list_models
 
-__all__ = ["load_model", "list_models", "Model"]
+__all__ = ["Model", "load_model", "list_models"]
