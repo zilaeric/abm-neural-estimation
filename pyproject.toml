@@ -26,3 +26,27 @@ deepfabm-evaluate = "deepfabm.evaluate:run"
 [project.urls]
 Homepage = "https://github.com/zilaeric/abm-neural-estimation"
 Issues = "https://github.com/zilaeric/abm-neural-estimation/issues"
+
+# --- Linting / formatting -------------------------------------------------
+# Ruff enforces PEP 8-style checks via pycodestyle (E/W) and related rules.
+[tool.ruff]
+target-version = "py314"
+line-length = 88
+
+# Keep linting focused on the Python package and tests.
+src = ["src"]
+extend-exclude = [
+  "data",
+  "results",
+  "wandb",
+  "weights",
+]
+
+[tool.ruff.lint]
+# E/W: pycodestyle (PEP 8), F: pyflakes (unused imports/vars), I: import sorting.
+select = ["E", "W", "F", "I"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
