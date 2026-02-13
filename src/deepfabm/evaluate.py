@@ -1,15 +1,20 @@
+from __future__ import annotations
+
 import sys
+from argparse import Namespace
 
 from deepfabm.utils import LOGGER, initialize_run, terminate_run
 
 
-def main(args: list[str]) -> int:
+def main(args: list[str] | Namespace) -> int:
     """
     Performs inference using neural network trained to calibrate parameters of
     a financial agent-based model.
 
     :param args: CLI arguments passed during invocation
-    :type args: list[str]
+    :type args: list[str] | argparse.Namespace
+    :return: Return value of the program
+    :rtype: int
     """
     args = initialize_run("evaluate", args)
 
@@ -24,12 +29,5 @@ def main(args: list[str]) -> int:
     return 0
 
 
-def run(argv: list[str] | None = None) -> int:
-    """
-    Calls the main function when CLI is used.
-    """
-    return main(sys.argv[1:] if argv is None else argv)
-
-
 if __name__ == "__main__":
-    raise SystemExit(run())
+    raise SystemExit(main(sys.argv[1:]))

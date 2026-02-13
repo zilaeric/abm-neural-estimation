@@ -62,24 +62,24 @@ section before.
 
 ## Usage
 
-The most straightforward way to employ the package is through its command-line interface
-(CLI).
+The most straightforward way to use the package is through its command-line interface
+(CLI). The package provides a unified entry-point via `deepfabm`.
 
 ### Training
 
-The `deepfabm-train` command can be used to train the neural network.
+The `deepfabm train` command can be used to train the neural network.
 
 ```
-$ deepfabm-train --help
-usage: deepfabm-train [--help] [--verbose] [--seed INT] [--wandb STR] --architecture {gru}
+$ deepfabm train --help
+usage: deepfabm train [--help] [--verbose] [--seed INT] [--wandb STR] --architecture {gru}
 
-Parser for training
+DeepFABM model training interface.
 
-Required arguments:
+required arguments:
   --architecture, -a {gru}
                         choose network architecture to train
 
-Optional arguments:
+optional arguments:
   --help, -h            show this help message and exit
   --verbose, -v         set loglevel to DEBUG
   --seed, -s INT        set seed for reproducibility
@@ -88,19 +88,19 @@ Optional arguments:
 
 ### Evaluation
 
-The `deepfabm-evaluate` command can be used to perform inference using a trained neural
+The `deepfabm evaluate` command can be used to perform inference using a trained neural
 network.
 
 ```
-$ deepfabm-evaluate --help
-usage: deepfabm-evaluate [--help] [--verbose] [--seed INT] [--wandb STR] --folder STR [--data STR]
+$ deepfabm evaluate --help
+usage: deepfabm evaluate [--help] [--verbose] [--seed INT] [--wandb STR] --folder STR [--data STR]
 
-Parser for evaluation
+DeepFABM model evaluation interface.
 
-Required arguments:
+required arguments:
   --folder, -f STR  choose results folder with trained weights to use for evaluation
 
-Optional arguments:
+optional arguments:
   --help, -h        show this help message and exit
   --verbose, -v     set loglevel to DEBUG
   --seed, -s INT    set seed for reproducibility
