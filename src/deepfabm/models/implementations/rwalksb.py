@@ -5,6 +5,8 @@ from ..registry import register_model
 
 
 @register_model("rwalksb")
-class RandomWalkWithStructuralBreak(Model):
-    def generate(self, parameters: np.ndarray) -> np.ndarray:
+class RandomWalkStructuralBreak(Model):
+    """Random walk with a structural break."""
+
+    def generate(self, parameters: dict, obs: int, burn: int, batch: int) -> np.ndarray:
         raise NotImplementedError(f"{self.__class__} has not been implemented yet!")
