@@ -1,0 +1,38 @@
+name: Pytest
+
+on:
+  pull_request:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Install dependencies (CPU-only torch)
+        shell: bash
+        run: |
+          set -euxo pipefail
+          python -m pip install --upgrade pip
+
+          # Install non-torch deps from requirements.txt, keeping CI lighter and
+          # ensuring torch is installed from the CPU wheel index.
+          grep -vE '^(torch|ruff|pre-commit)\b' requirements.txt > /tmp/requirements-ci.txt
+          pip install -r /tmp/requirements-ci.txt
+
+          # Explicitly install CPU-only PyTorch wheels.
+          pip install --index-url https://download.pytorch.org/whl/cpu torch
+
+          # Install the package itself for import resolution in tests.
+          pip install -e .
+
+      - name: Pytest
+        run: |
+          python -m pytest tests
