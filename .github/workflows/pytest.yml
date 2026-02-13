@@ -20,7 +20,7 @@ jobs:
             requirements.txt
             pyproject.toml
 
-      - name: Install dependencies (CPU-only torch)
+      - name: Install dependencies
         shell: bash
         run: |
           set -euxo pipefail
