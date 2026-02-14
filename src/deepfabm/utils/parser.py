@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-import argparse
 import logging
+from argparse import ArgumentParser, Namespace
 
 
 class BaseParser:
     def __init__(self, description="Parser template", include_common: bool = True):
         # Initialize parser
-        self.parser = argparse.ArgumentParser(description=description, add_help=False)
+        self.parser = ArgumentParser(description=description, add_help=False)
 
         # Define argument groups
         self.required = self.parser.add_argument_group("required arguments")
@@ -52,8 +52,16 @@ class BaseParser:
                 default=None,
             )
 
-    def parse_args(self, args) -> dict:
-        return vars(self.parser.parse_args(args))
+    def parse_args(self, args: list[str]) -> Namespace:
+        """
+        Parses arguments into dictonary.
+
+        :param args: List of arguments and values, typically retrieved as CLI arguments
+        :type args: list[str]
+        :return: Namespace mapping argument names to their values
+        :rtype: Namespace
+        """
+        return self.parser.parse_args(args)
 
 
 class TrainParser(BaseParser):

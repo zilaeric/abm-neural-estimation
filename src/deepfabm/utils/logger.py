@@ -17,19 +17,19 @@ def setup_logging(loglevel: int | str) -> None:
     )
 
 
-def setup_wandb(project: str = "deepabm", config: dict = None) -> None:
+def setup_wandb(project: str, config: dict) -> None:
     """
-    Initiate Weights & Biases logging.
+    Initialize Weights & Biases logging.
 
     :param project: W&B project name to pass results to
     :type project: str
-    :param config: Training configuration to save in the W&B project
+    :param config: Experimental setup to save in the W&B project
     :type config: dict
     """
     import wandb
 
     wandb.init(project=project, config=config)
-    LOGGER.info(f"Weights & Biases logging initialized under '{project}' project.")
+    LOGGER.info(f"Weights & Biases logging initialized under {project!r} project.")
 
 
 def terminate_wandb() -> None:
