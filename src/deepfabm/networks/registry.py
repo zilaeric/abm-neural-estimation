@@ -25,7 +25,7 @@ def _register_implementations() -> None:
     _IMPLEMENTATIONS_IMPORTED = True
 
     LOGGER.debug(
-        f"Network registry contains the following networks: {list_networks()}."
+        f"Network registry contains the following networks: {list_networks()!r}."
     )
 
 
@@ -39,11 +39,11 @@ def register_network(name: str):
 
     def decorator(network_class: type[Network]) -> type[Network]:
         if name in _NETWORK_REGISTRY and _NETWORK_REGISTRY[name] is not network_class:
-            raise ValueError(f"Network '{name}' already registered.")
+            raise ValueError(f"Network {name!r} already registered.")
 
         if not issubclass(network_class, Network):
             raise TypeError(
-                f"Trying to add network '{name}' which is not of the 'Network' class."
+                f"Trying to add network {name!r} which is not of the 'Network' class."
             )
 
         # Add network to network registry
@@ -79,10 +79,10 @@ def load_network(network: str, **kwargs) -> Network:
 
     try:
         network_class = _NETWORK_REGISTRY[network]
-        LOGGER.info(f"Loaded network '{network}' from network registry.")
+        LOGGER.info(f"Loaded network {network!r} from network registry.")
     except KeyError as e:
         raise ValueError(
-            f"No network found for '{network}'. Available: {list_networks()}."
+            f"No network found for {network!r}. Available: {list_networks()!r}."
         ) from e
 
     return network_class(**kwargs)

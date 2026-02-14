@@ -31,17 +31,19 @@ def initialize_run(
         if script in _PARSER_MAP:
             parser = _PARSER_MAP[script]()
         else:
-            raise ValueError(f"No parser found for the invoked script '{script}'")
+            raise ValueError(f"No parser found for the invoked script {script!r}")
 
         parsed_args = parser.parse_args(args)
 
     # Set up logging
     setup_logging(parsed_args.loglevel)
-    LOGGER.info(f"Dictionary of parsed arguments: {vars(parsed_args)}")
+    LOGGER.info(f"Dictionary of parsed arguments: {vars(parsed_args)!r}")
 
     # Set up Weights & Biases logging
     if parsed_args.wandb:
         setup_wandb(project=parsed_args.wandb, config=vars(parsed_args))
+    else:
+        LOGGER.info("Skipping Weights & Biases initialization.")
 
     # Set up the random seed
     set_seed(parsed_args.seed)

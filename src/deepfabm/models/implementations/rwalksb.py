@@ -9,4 +9,4 @@ class RandomWalkStructuralBreak(Model):
     """Random walk with a structural break."""
 
     def generate(self, parameters: dict, obs: int, burn: int, batch: int) -> np.ndarray:
-        raise NotImplementedError(f"{self.__class__} has not been implemented yet!")
+        raise NotImplementedError(f"{self.__class__!r} has not been implemented yet!")

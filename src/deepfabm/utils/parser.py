@@ -52,8 +52,8 @@ class BaseParser:
                 default=None,
             )
 
-    def parse_args(self, args) -> argparse.Namespace:
-        return self.parser.parse_args(args)
+    def parse_args(self, args) -> dict:
+        return vars(self.parser.parse_args(args))
 
 
 class TrainParser(BaseParser):
