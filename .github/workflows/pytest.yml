@@ -48,7 +48,7 @@ jobs:
           # Install third-party dependencies on cache miss
           if [ "${VENV_CACHE_HIT}" != "true" ]; then
             # Exclude unnecessary dependencies
-            grep -vE '^(torch|ruff|pre-commit)\b' requirements.txt > /tmp/requirements-ci.txt
+            grep -vE '^(matplotlib|torch|ruff|pre-commit)\b' requirements.txt > /tmp/requirements-ci.txt
             pip install -r /tmp/requirements-ci.txt
 
             # Explicitly install CPU-only PyTorch wheels.
