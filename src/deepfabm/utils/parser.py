@@ -36,7 +36,7 @@ class CLIParser:
 
         subparsers.add_parser(
             "plot",
-            help="simulation model and empirical data plotting",
+            help="data plotting",
             description="DeepFABM plotting functionality interface.",
             add_help=False,
             parents=[PlotParser().parser],
