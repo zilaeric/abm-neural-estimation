@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from argparse import ArgumentParser, Namespace
 
-from .parsers import EvaluateParser, TrainParser
+from .parsers import EvaluateParser, PlotParser, TrainParser
 
 
 class CLIParser:
@@ -32,6 +32,14 @@ class CLIParser:
             description="DeepFABM model evaluation interface.",
             add_help=False,
             parents=[EvaluateParser().parser],
+        )
+
+        subparsers.add_parser(
+            "plot",
+            help="simulation model and empirical data plotting",
+            description="DeepFABM plotting functionality interface.",
+            add_help=False,
+            parents=[PlotParser().parser],
         )
 
         self.optional = self.parser.add_argument_group("optional arguments")
