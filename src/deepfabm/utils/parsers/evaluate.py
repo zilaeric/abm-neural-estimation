@@ -9,7 +9,7 @@ class EvaluateParser(Parser):
     def _add_positional(self):
         self.positional.add_argument(
             dest="folder",
-            help="choose results folder with trained weights to use for evaluation",
+            help="path to results folder with trained weights in the '/results' folder",
             type=str,
         )
 
@@ -18,7 +18,7 @@ class EvaluateParser(Parser):
             "--data",
             "-d",
             dest="data",
-            help="choose empirical data to estimate model for, else use simulated data",
+            help="path to empirical data in the '/data' folder, else simulate data",
             type=str,
             metavar="STR",
             default=None,

@@ -9,7 +9,7 @@ class TrainParser(Parser):
     def _add_positional(self) -> None:
         self.positional.add_argument(
             dest="experiment",
-            help="choose experiment configuration from the 'experiments' folder",
+            help="path to experiment configuration in the '/experiments' folder",
             type=str,
         )
 
@@ -21,7 +21,7 @@ class TrainParser(Parser):
             "--wandb",
             "-wb",
             dest="wandb",
-            help="set Weights & Biases project name to store experiment run to",
+            help="Weights & Biases project name; do not use W&B if not set",
             type=str,
             metavar="STR",
             default=None,

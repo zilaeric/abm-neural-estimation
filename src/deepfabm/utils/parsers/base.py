@@ -46,7 +46,7 @@ class Parser(ABC):
             "--seed",
             "-s",
             dest="seed",
-            help="set seed for reproducibility",
+            help="reproducibility seed number",
             type=int,
             metavar="INT",
             default=42,

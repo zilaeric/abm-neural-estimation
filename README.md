@@ -76,12 +76,12 @@ usage: deepfabm train [--seed INT] [--verbose] [--wandb STR] [--help] experiment
 DeepFABM model training interface.
 
 positional arguments:
-  experiment        choose experiment configuration from the 'experiments' folder
+  experiment        path to experiment configuration in the '/experiments' folder
 
 optional arguments:
-  --seed, -s INT    set seed for reproducibility
+  --seed, -s INT    reproducibility seed number
   --verbose, -v     set loglevel to DEBUG
-  --wandb, -wb STR  set Weights & Biases project name to store experiment run to
+  --wandb, -wb STR  Weights & Biases project name; do not use W&B if not set
   --help, -h        show this help message and exit
 ```
 
@@ -97,11 +97,48 @@ usage: deepfabm evaluate [--data STR] [--seed INT] [--verbose] [--help] folder
 DeepFABM model evaluation interface.
 
 positional arguments:
-  folder          choose results folder with trained weights to use for evaluation
+  folder          path to results folder with trained weights in the '/results' folder
 
 optional arguments:
-  --data, -d STR  choose empirical data to estimate model for, else use simulated data
-  --seed, -s INT  set seed for reproducibility
+  --data, -d STR  path to empirical data in the '/data' folder, else simulate data
+  --seed, -s INT  reproducibility seed number
   --verbose, -v   set loglevel to DEBUG
   --help, -h      show this help message and exit
+```
+
+### Plotting
+
+The `deepfabm plot` command can be used to plot model realizations and empirical data.
+
+#### Empirical data
+
+```
+$ deepfabm plot emp --help
+usage: deepfabm emp --data STR [--help]
+
+DeepFABM empirical data plotting interface.
+
+required arguments:
+  --data, -d STR  path to empirical data in the '/data' folder
+
+optional arguments:
+  --help, -h      show this help message and exit
+```
+
+#### Simulated data
+
+```
+$ deepfabm plot sim --help
+usage: deepfabm sim --model STR --obs INT --burn INT [--seed INT] [--help]
+
+DeepFABM simulated data plotting interface.
+
+required arguments:
+  --model, -m STR  simulation model identifier
+  --obs INT        number of observations
+  --burn INT       burn-in period length
+
+optional arguments:
+  --seed, -s INT   reproducibility seed number
+  --help, -h       show this help message and exit
 ```
