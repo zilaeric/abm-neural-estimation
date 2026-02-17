@@ -71,19 +71,18 @@ The `deepfabm train` command can be used to train the neural network.
 
 ```
 $ deepfabm train --help
-usage: deepfabm train [--help] [--verbose] [--seed INT] [--wandb STR] --architecture {gru}
+usage: deepfabm train [--seed INT] [--verbose] [--wandb STR] [--help] experiment
 
 DeepFABM model training interface.
 
-required arguments:
-  --architecture, -a {gru}
-                        choose network architecture to train
+positional arguments:
+  experiment        choose experiment configuration from the 'experiments' folder
 
 optional arguments:
-  --help, -h            show this help message and exit
-  --verbose, -v         set loglevel to DEBUG
-  --seed, -s INT        set seed for reproducibility
-  --wandb, -wb STR      set Weights & Biases project name to store experiment run to
+  --seed, -s INT    set seed for reproducibility
+  --verbose, -v     set loglevel to DEBUG
+  --wandb, -wb STR  set Weights & Biases project name to store experiment run to
+  --help, -h        show this help message and exit
 ```
 
 ### Evaluation
@@ -93,17 +92,16 @@ network.
 
 ```
 $ deepfabm evaluate --help
-usage: deepfabm evaluate [--help] [--verbose] [--seed INT] [--wandb STR] --folder STR [--data STR]
+usage: deepfabm evaluate [--data STR] [--seed INT] [--verbose] [--help] folder
 
 DeepFABM model evaluation interface.
 
-required arguments:
-  --folder, -f STR  choose results folder with trained weights to use for evaluation
+positional arguments:
+  folder          choose results folder with trained weights to use for evaluation
 
 optional arguments:
-  --help, -h        show this help message and exit
-  --verbose, -v     set loglevel to DEBUG
-  --seed, -s INT    set seed for reproducibility
-  --wandb, -wb STR  set Weights & Biases project name to store experiment run to
-  --data, -d STR    choose empirical data to estimate model for, else use simulate data
+  --data, -d STR  choose empirical data to estimate model for, else use simulated data
+  --seed, -s INT  set seed for reproducibility
+  --verbose, -v   set loglevel to DEBUG
+  --help, -h      show this help message and exit
 ```
