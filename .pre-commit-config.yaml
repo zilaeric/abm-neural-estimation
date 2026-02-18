@@ -18,3 +18,10 @@ repos:
         entry: conda run -n deepfabm python -m pytest
         language: system
         pass_filenames: false
+
+      - id: readme-update
+        name: readme (update)
+        entry: conda run -n deepfabm python scripts/update_readme.py
+        language: system
+        pass_filenames: false
+        files: ^README\.md$
