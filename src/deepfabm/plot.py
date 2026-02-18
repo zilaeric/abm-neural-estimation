@@ -23,16 +23,20 @@ def main(args: list[str] | Namespace) -> int:
     :return: Return value of the program
     :rtype: int
     """
+    # Prepare empirical data
     if args.type == "emp":
         # Load empirical data
         data = load_data(args.data)
+
+    # Prepare simulated data
     if args.type == "sim":
         # Set random seed
         set_seed(args.seed)
 
-        # Load model and generate data
-        model = load_model()
-        data = model.generate()
+        # Load simulation model and generate data
+        model = load_model(args.model)
+        parameters = model.get_parameters(args.parametrization)
+        data = model.generate(parameters, args.obs, args.burn, 1)
 
     # TODO: Plot data
     print(data)

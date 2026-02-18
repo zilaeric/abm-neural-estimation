@@ -8,6 +8,10 @@ from ..registry import register_model
 class RandomWalkDrift(Model):
     """Random walk with a drift."""
 
+    _PARAMETRIZATIONS = {
+        "default": {"d": 0.6},
+    }
+
     def generate(self, parameters: dict, obs: int, burn: int, batch: int) -> np.ndarray:
         # Retrieve parameters from parameter array
         d = parameters["d"]

@@ -33,6 +33,16 @@ class SimulatedPlotParser(Parser):
         )
 
         self.required.add_argument(
+            "--parametrization",
+            "-p",
+            dest="parametrization",
+            help="simulation model parametrization identifier",
+            type=str,
+            metavar="STR",
+            required=True,
+        )
+
+        self.required.add_argument(
             "--obs",
             dest="obs",
             help="number of observations",
