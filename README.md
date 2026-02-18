@@ -129,16 +129,18 @@ optional arguments:
 
 ```
 $ deepfabm plot sim --help
-usage: deepfabm sim --model STR --obs INT --burn INT [--seed INT] [--help]
+usage: deepfabm sim --model STR --parametrization STR --obs INT --burn INT [--seed INT] [--help]
 
 DeepFABM simulated data plotting interface.
 
 required arguments:
-  --model, -m STR  simulation model identifier
-  --obs INT        number of observations
-  --burn INT       burn-in period length
+  --model, -m STR       simulation model identifier
+  --parametrization, -p STR
+                        simulation model parametrization identifier
+  --obs INT             number of observations
+  --burn INT            burn-in period length
 
 optional arguments:
-  --seed, -s INT   reproducibility seed number
-  --help, -h       show this help message and exit
+  --seed, -s INT        reproducibility seed number
+  --help, -h            show this help message and exit
 ```
