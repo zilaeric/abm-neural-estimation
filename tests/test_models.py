@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from deepfabm.models import Model, load_model
+from deepfabm.models import Model, list_models, load_model
 
 
 def test_load_model_unknown_raises_value_error():
@@ -10,8 +10,10 @@ def test_load_model_unknown_raises_value_error():
 
 
 def test_load_model_returns_model_instance():
-    model = load_model("rwalksb")
-    assert isinstance(model, Model)
+    # Ensure every registered model can be instantiated
+    for model_name in list_models():
+        model = load_model(model_name)
+        assert isinstance(model, Model)
 
 
 def test_rwalkd_replicability():
@@ -23,3 +25,14 @@ def test_rwalkd_replicability():
         dtype=np.float64,
     )
     np.testing.assert_allclose(returns, expected, rtol=1e-5)
+
+
+def test_every_model_has_default_parametrization():
+    # Ensure every registered model has the "default" parametrization defined
+    for model_name in list_models():
+        model = load_model(model_name)
+        assert "default" in model.list_parametrizations(), (
+            f"Model '{model_name}' must define a 'default' parametrization. "
+            f"Available: {model.list_parametrizations()}."
+        )
+        assert isinstance(model.get_parameters("default"), dict)

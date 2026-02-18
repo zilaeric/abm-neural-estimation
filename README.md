@@ -71,19 +71,18 @@ The `deepfabm train` command can be used to train the neural network.
 
 ```
 $ deepfabm train --help
-usage: deepfabm train [--help] [--verbose] [--seed INT] [--wandb STR] --architecture {gru}
+usage: deepfabm train [--seed INT] [--verbose] [--wandb STR] [--help] experiment
 
 DeepFABM model training interface.
 
-required arguments:
-  --architecture, -a {gru}
-                        choose network architecture to train
+positional arguments:
+  experiment        path to experiment configuration in the '/experiments' folder
 
 optional arguments:
-  --help, -h            show this help message and exit
-  --verbose, -v         set loglevel to DEBUG
-  --seed, -s INT        set seed for reproducibility
-  --wandb, -wb STR      set Weights & Biases project name to store experiment run to
+  --seed, -s INT    reproducibility seed number
+  --verbose, -v     set loglevel to DEBUG
+  --wandb, -wb STR  Weights & Biases project name; do not use W&B if not set
+  --help, -h        show this help message and exit
 ```
 
 ### Evaluation
@@ -93,17 +92,55 @@ network.
 
 ```
 $ deepfabm evaluate --help
-usage: deepfabm evaluate [--help] [--verbose] [--seed INT] [--wandb STR] --folder STR [--data STR]
+usage: deepfabm evaluate [--data STR] [--seed INT] [--verbose] [--help] folder
 
 DeepFABM model evaluation interface.
 
-required arguments:
-  --folder, -f STR  choose results folder with trained weights to use for evaluation
+positional arguments:
+  folder          path to results folder with trained weights in the '/results' folder
 
 optional arguments:
-  --help, -h        show this help message and exit
-  --verbose, -v     set loglevel to DEBUG
-  --seed, -s INT    set seed for reproducibility
-  --wandb, -wb STR  set Weights & Biases project name to store experiment run to
-  --data, -d STR    choose empirical data to estimate model for, else use simulate data
+  --data, -d STR  path to empirical data in the '/data' folder, else simulate data
+  --seed, -s INT  reproducibility seed number
+  --verbose, -v   set loglevel to DEBUG
+  --help, -h      show this help message and exit
+```
+
+### Plotting
+
+The `deepfabm plot` command can be used to plot model realizations and empirical data.
+
+#### Empirical data
+
+```
+$ deepfabm plot emp --help
+usage: deepfabm emp --data STR [--help]
+
+DeepFABM empirical data plotting interface.
+
+required arguments:
+  --data, -d STR  path to empirical data in the '/data' folder
+
+optional arguments:
+  --help, -h      show this help message and exit
+```
+
+#### Simulated data
+
+```
+$ deepfabm plot sim --help
+usage: deepfabm sim --model STR --parametrization STR --obs INT --burn INT [--seed INT] [--help]
+
+DeepFABM simulated data plotting interface.
+
+required arguments:
+  --model, -m STR       simulation model identifier
+  --parametrization, -p STR
+                        simulation model parametrization identifier
+  --obs INT             number of observations
+  --burn INT            burn-in period length
+
+optional arguments:
+  --seed, -s INT        reproducibility seed number
+  --help, -h            show this help message and exit
 ```

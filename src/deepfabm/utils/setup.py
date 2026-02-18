@@ -43,7 +43,7 @@ def initialize_run(
     if parsed_args.wandb:
         setup_wandb(project=parsed_args.wandb, config=vars(parsed_args))
 
-    # Set up the random seed
+    # Set random seed
     set_seed(parsed_args.seed)
 
     return parsed_args
