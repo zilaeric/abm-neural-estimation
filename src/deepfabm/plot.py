@@ -4,7 +4,7 @@ import sys
 from argparse import Namespace
 
 from deepfabm.models import load_model
-from deepfabm.utils import load_data, set_seed
+from deepfabm.utils import load_data, plot_returns, set_seed
 
 
 def main(args: list[str] | Namespace) -> int:
@@ -23,12 +23,15 @@ def main(args: list[str] | Namespace) -> int:
     :return: Return value of the program
     :rtype: int
     """
-    # Prepare empirical data
+    # Plot empirical data
     if args.type == "emp":
         # Load empirical data
         data = load_data(args.data)
 
-    # Prepare simulated data
+        # Plot series
+        plot_returns(data["returns"], folder=args.data[:-4], dates=data["dates"])
+
+    # Plot simulated data
     if args.type == "sim":
         # Set random seed
         set_seed(args.seed)
@@ -38,8 +41,8 @@ def main(args: list[str] | Namespace) -> int:
         parameters = model.get_parameters(args.parametrization)
         data = model.generate(parameters, args.obs, args.burn, 1)
 
-    # TODO: Plot data
-    print(data)
+        # Plot series
+        plot_returns(data[0].tolist(), folder=args.model)
 
     return 0
 

@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import csv
 import os
-from datetime import datetime
 
 
 def load_data(file: str) -> dict[str, list]:
@@ -30,7 +29,7 @@ def load_data(file: str) -> dict[str, list]:
     with open(path) as f:
         reader = csv.DictReader(f)
         for row in reader:
-            dates.append(datetime.strptime(row["date"], "%Y-%m-%d").date())
+            dates.append(str(row["date"]))
             prices.append(float(row["price"]))
             prices_ln.append(float(row["price_ln"]))
             returns.append(float(row["return"]))
