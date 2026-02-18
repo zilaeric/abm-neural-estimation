@@ -3,6 +3,7 @@ from __future__ import annotations
 import logging
 from argparse import ArgumentParser, Namespace
 
+from .parsers import EvaluateParser, PlotParser, TrainParser
 
 class BaseParser:
     def __init__(self, description="Parser template", include_common: bool = True):
@@ -126,10 +127,9 @@ class CLIParser(BaseParser):
     """Command-line interface parser."""
 
     def __init__(self):
-        super().__init__(
-            description=("DeepFABM command-line interface. Choose from methods below."),
-            include_common=False,
-        )
+        # Initialize parser
+        description = "DeepFABM command-line interface. Choose from methods below."
+        self.parser = ArgumentParser(description=description, add_help=False)
 
         subparsers = self.parser.add_subparsers(
             dest="command",
@@ -151,3 +151,30 @@ class CLIParser(BaseParser):
             add_help=False,
             parents=[EvaluateParser().parser],
         )
+
+        subparsers.add_parser(
+            "plot",
+            help="data plotting",
+            description="DeepFABM plotting functionality interface.",
+            add_help=False,
+            parents=[PlotParser().parser],
+        )
+
+        self.optional = self.parser.add_argument_group("optional arguments")
+        self.optional.add_argument(
+            "--help",
+            "-h",
+            help="show this help message and exit",
+            action="help",
+        )
+
+    def parse_args(self, args: list[str]) -> Namespace:
+        """
+        Parses arguments into dictonary.
+
+        :param args: List of arguments and values, typically retrieved as CLI arguments
+        :type args: list[str]
+        :return: Namespace mapping argument names to their values
+        :rtype: Namespace
+        """
+        return self.parser.parse_args(args)

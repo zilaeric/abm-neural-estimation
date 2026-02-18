@@ -3,6 +3,7 @@ from __future__ import annotations
 import sys
 
 from deepfabm.evaluate import main as evaluate_main
+from deepfabm.plot import main as plot_main
 from deepfabm.train import main as train_main
 from deepfabm.utils.parser import CLIParser
 
@@ -18,10 +19,12 @@ def main(args: list[str]) -> int:
     """
     parsed_args = CLIParser().parse_args(args)
 
-    if parsed_args.command == "train":
-        return train_main(parsed_args)
-    if parsed_args.command == "evaluate":
-        return evaluate_main(parsed_args)
+    if parsed.command == "train":
+        return train_main(parsed)
+    if parsed.command == "evaluate":
+        return evaluate_main(parsed)
+    if parsed.command == "plot":
+        return plot_main(parsed)
 
     # Throw error if unknown command is used
     raise ValueError(f"Unknown command: {parsed_args.command!r}")

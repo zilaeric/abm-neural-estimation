@@ -49,7 +49,7 @@ def initialize_run(setup: Namespace) -> None:
     else:
         LOGGER.info("Skipping Weights & Biases initialization.")
 
-    # Set up the random seed
+    # Set random seed
     set_seed(setup.seed)
 
     return setup
