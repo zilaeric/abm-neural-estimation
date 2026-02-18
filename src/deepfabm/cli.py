@@ -19,12 +19,12 @@ def main(args: list[str]) -> int:
     """
     parsed_args = CLIParser().parse_args(args)
 
-    if parsed.command == "train":
-        return train_main(parsed)
-    if parsed.command == "evaluate":
-        return evaluate_main(parsed)
-    if parsed.command == "plot":
-        return plot_main(parsed)
+    if parsed_args.command == "train":
+        return train_main(parsed_args)
+    if parsed_args.command == "evaluate":
+        return evaluate_main(parsed_args)
+    if parsed_args.command == "plot":
+        return plot_main(parsed_args)
 
     # Throw error if unknown command is used
     raise ValueError(f"Unknown command: {parsed_args.command!r}")
