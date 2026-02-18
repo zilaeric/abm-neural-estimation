@@ -69,6 +69,7 @@ The most straightforward way to use the package is through its command-line inte
 
 The `deepfabm train` command can be used to train the neural network.
 
+<!-- CLI:train:START -->
 ```
 $ deepfabm train --help
 usage: deepfabm train [--seed INT] [--verbose] [--wandb STR] [--help] experiment
@@ -84,12 +85,14 @@ optional arguments:
   --wandb, -wb STR  Weights & Biases project name; do not use W&B if not set
   --help, -h        show this help message and exit
 ```
+<!-- CLI:train:END -->
 
 ### Evaluation
 
 The `deepfabm evaluate` command can be used to perform inference using a trained neural
 network.
 
+<!-- CLI:evaluate:START -->
 ```
 $ deepfabm evaluate --help
 usage: deepfabm evaluate [--data STR] [--seed INT] [--verbose] [--help] folder
@@ -105,6 +108,7 @@ optional arguments:
   --verbose, -v   set loglevel to DEBUG
   --help, -h      show this help message and exit
 ```
+<!-- CLI:evaluate:END -->
 
 ### Plotting
 
@@ -112,6 +116,7 @@ The `deepfabm plot` command can be used to plot model realizations and empirical
 
 #### Empirical data
 
+<!-- CLI:plot-emp:START -->
 ```
 $ deepfabm plot emp --help
 usage: deepfabm emp --data STR [--help]
@@ -124,9 +129,11 @@ required arguments:
 optional arguments:
   --help, -h      show this help message and exit
 ```
+<!-- CLI:plot-emp:END -->
 
 #### Simulated data
 
+<!-- CLI:plot-sim:START -->
 ```
 $ deepfabm plot sim --help
 usage: deepfabm sim --model STR --parametrization STR --obs INT --burn INT [--seed INT] [--help]
@@ -144,3 +151,4 @@ optional arguments:
   --seed, -s INT        reproducibility seed number
   --help, -h            show this help message and exit
 ```
+<!-- CLI:plot-sim:END -->
