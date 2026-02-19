@@ -48,7 +48,7 @@ def initialize_run(setup: Namespace) -> None:
         _prepare_results_dir(setup)
 
     # Set up logging
-    setup_logging(setup.loglevel)
+    setup_logging(setup.loglevel, getattr(setup, "logpath", None))
     LOGGER.info(f"Dictionary of parsed arguments: {vars(setup)!r}")
 
     # Set up Weights & Biases logging
