@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from .base import Parser
+from .parser_base import Parser
 
 
 class EmpiricalPlotParser(Parser):

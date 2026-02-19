@@ -23,7 +23,7 @@ def _register_implementations() -> None:
 
     _IMPLEMENTATIONS_IMPORTED = True
 
-    LOGGER.debug(f"Model registry contains the following models: {list_models()}.")
+    LOGGER.debug(f"Model registry contains the following models: {list_models()!r}.")
 
 
 def register_model(name: str):
@@ -36,11 +36,11 @@ def register_model(name: str):
 
     def decorator(model_class: type[Model]) -> type[Model]:
         if name in _MODEL_REGISTRY and _MODEL_REGISTRY[name] is not model_class:
-            raise ValueError(f"Model '{name}' already registered.")
+            raise ValueError(f"Model {name!r} already registered.")
 
         if not issubclass(model_class, Model):
             raise TypeError(
-                f"Trying to add model '{name}' which is not of the 'Model' class."
+                f"Trying to add model {name!r} which is not of the 'Model' class."
             )
 
         # Add model to model registry
@@ -76,10 +76,10 @@ def load_model(model: str, **kwargs) -> Model:
 
     try:
         model_class = _MODEL_REGISTRY[model]
-        LOGGER.info(f"Loaded model '{model}' from model registry.")
+        LOGGER.info(f"Loaded model {model!r} from model registry.")
     except KeyError as e:
         raise ValueError(
-            f"No model found for '{model}'. Available: {list_models()}."
+            f"No model found for {model!r}. Available: {list_models()!r}."
         ) from e
 
     return model_class(**kwargs)

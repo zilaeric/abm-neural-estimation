@@ -1,0 +1,11 @@
+# General parameters
+seed: 42
+
+# Simulation model parameters
+parametrization: default # Parametrization identifier as per model implementation file
+constraints: default # Constraints identifier as per model implementation file
+parameters: default # Parameter set to estimate as per model implementation file
+obs: 10000 # Number of observations during model simulation
+burn: 5000 # Burn-in period length during model simulation
+
+# Calibration model parameters

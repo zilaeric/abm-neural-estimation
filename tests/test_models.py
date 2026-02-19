@@ -32,7 +32,7 @@ def test_every_model_has_default_parametrization():
     for model_name in list_models():
         model = load_model(model_name)
         assert "default" in model.list_parametrizations(), (
-            f"Model '{model_name}' must define a 'default' parametrization. "
+            f"Model {model_name!r} must define a 'default' parametrization. "
             f"Available: {model.list_parametrizations()}."
         )
         assert isinstance(model.get_parameters("default"), dict)

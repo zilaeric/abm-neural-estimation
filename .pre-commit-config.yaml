@@ -23,5 +23,5 @@ repos:
         name: readme (update)
         entry: conda run -n deepfabm python scripts/update_readme.py
         language: system
+        files: '(^|/)parser[^/]*\.py$'
         pass_filenames: false
-        files: ^README\.md$

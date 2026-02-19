@@ -6,5 +6,5 @@ from ..registry import register_network
 class LSTM(Network):
     def forward(self, *args, **kwargs):
         raise NotImplementedError(
-            f"{self.__class__} forward pass has not been implemented yet!"
+            f"{self.__class__!r} forward pass has not been implemented yet!"
         )
