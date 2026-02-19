@@ -15,14 +15,17 @@ def _prepare_results_dir(setup: Namespace) -> None:
     :type setup: Namespace
     """
     # Create unique identifier for the current experiment
-    id = f"experiment_{datetime.now().strftime('%Y-%m-%mT%H:%M:%S')}"
+    id = f"{setup.experiment}_{datetime.now().strftime('%Y-%m-%mT%H:%M:%S')}"
 
     # Create experiment results directory
     resultsdir = os.path.join("results", id)
     os.mkdir(resultsdir)
-
-    # Save path to results directory to experimental setup
     setup.resultsdir = resultsdir
+
+    # Create trained weights directory
+    weightsdir = os.path.join("results", id, "weights")
+    os.mkdir(weightsdir)
+    setup.weightsdir = weightsdir
 
 
 def initialize_run(setup: Namespace) -> None:
