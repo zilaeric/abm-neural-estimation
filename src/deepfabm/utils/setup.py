@@ -27,6 +27,11 @@ def _prepare_results_dir(setup: Namespace) -> None:
     os.mkdir(weightsdir)
     setup.weightsdir = weightsdir
 
+    # Create log file
+    logpath = os.path.join("results", id, "log.txt")
+    open(logpath, "a")
+    setup.logpath = logpath
+
 
 def initialize_run(setup: Namespace) -> None:
     """
