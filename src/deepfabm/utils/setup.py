@@ -35,6 +35,31 @@ def _prepare_results_dir(setup: Namespace) -> None:
     setup.logpath = logpath
 
 
+def _merge_configuration(setup: Namespace) -> None:
+    """
+    Combine experiment configuration such as to respect priority of each source.
+
+    Experimental setup sources take procedence (highest to lowest) as follows:
+    1. command-line interface arguments,
+    2. named experiment configuration file from the `experiments/` folder, and
+    3. default experiment configuration file at 'experiments/default.yaml'.
+
+    :param setup: Experimental setup
+    :type setup: Namespace
+    """
+    # Define paths of files to read experimental configurations from
+    experimentpath = os.path.join("experiments", f"{setup.experiment}.yaml")
+    defaultpath = os.path.join("experiments", "default.yaml")
+
+    # Add configurations to experimental setup if not set
+    for source in [experimentpath, defaultpath]:
+        with open(source, "r") as f:
+            config = yaml.safe_load(f)
+            for arg in config:
+                if arg not in setup:
+                    setattr(setup, arg, config[arg])
+
+
 def _save_configuration(setup: Namespace) -> None:
     """
     Saves experimental setup passed as `setup` to the designated experiment results
@@ -45,7 +70,7 @@ def _save_configuration(setup: Namespace) -> None:
     """
     configpath = os.path.join(setup.resultsdir, "config.yaml")
     with open(configpath, "a") as f:
-        yaml.dump(vars(setup), f)
+        yaml.safe_dump(vars(setup), f)
 
 
 def initialize_run(setup: Namespace) -> None:
@@ -62,6 +87,7 @@ def initialize_run(setup: Namespace) -> None:
 
     # Finalize configuration
     if setup.command == "train":
+        _merge_configuration(setup)
         _save_configuration(setup)
 
     # Set up logging
