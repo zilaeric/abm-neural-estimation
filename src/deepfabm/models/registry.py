@@ -36,7 +36,7 @@ def register_model(name: str):
 
     def decorator(model_class: type[Model]) -> type[Model]:
         if name in _MODEL_REGISTRY and _MODEL_REGISTRY[name] is not model_class:
-            raise ValueError(f"Model '{name!r}' already registered.")
+            raise ValueError(f"Model {name!r} already registered.")
 
         if not issubclass(model_class, Model):
             raise TypeError(
